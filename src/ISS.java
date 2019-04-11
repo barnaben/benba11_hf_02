@@ -33,23 +33,38 @@ public class ISS {
 
     String requestDock(int weight, int pass) {
         String dock = checkDocks();
-        if ((weightLimit - currentWeight) >= weight && (guestLimit - currentGuests) >= pass && !dock.equals("denied")) {
+        System.out.println(weightLimit - currentWeight + " " + weight);
+        System.out.println(guestLimit - currentGuests + " " + pass);
+        System.out.println(dock.equals("denied"));
+        if (((weightLimit - currentWeight) >= weight) && ((guestLimit - currentGuests) >= pass) && !dock.equals("denied")) {
+            System.out.println("van jó");
             return dock;
         }
-        return dock;
+        return "denied";
     }
 
     String checkDocks() {
-        synchronized (this) {
-            for (Dock d : docks) {
-                if (d.isFree == true) {
-                    {
-                        return d.ID;
-                    }
-
-                }
+        System.out.println("checkDock");
+        for (Dock d : docks
+        ) {
+            if (d.isFree == true) {
+                return d.ID;
             }
+
+        }
             return "denied";
+        }
+
+
+    void toDock(String ID, SpaceShip s) {
+        for (Dock d : docks) {
+            if (d.ID.equals(ID)) {
+                {
+                    System.out.println("itt ISS");
+                    d.dockShip(s);
+                }
+
+            }
         }
     }
 }

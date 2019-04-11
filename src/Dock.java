@@ -17,6 +17,7 @@ public class Dock {
     }
 
     void dockShip(SpaceShip s) {
-
+        s.isDocked = true;
+        System.out.println("itt");
     }
 }

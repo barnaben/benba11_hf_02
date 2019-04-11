@@ -30,8 +30,8 @@ class CentralComp extends Thread {
             long time = System.currentTimeMillis();
             if ((time - timer) > (random.nextInt(5000) + 5000)) {
                 SpaceShip s = new SpaceShip(name + number, random.nextInt(900) + 100, random.nextInt(90) + 10);
-                s.start();
                 String str = "A " + s.ID + " hajó elindult " + s.weight + " sullyal es " + s.capacity + " emberrel";
+                s.start();
                 CentralComp.getInstance().eventLog(str);
                 timer = time;
                 number++;
@@ -46,12 +46,17 @@ class CentralComp extends Thread {
     }
 
     String requestDock(String ID, int weight, int cap) {
+
         eventLog(ID + " várakozik dokkoláshoz");
         String str = iss.requestDock(weight, cap);
+        System.out.println("ccben " + str);
         return str;
+
     }
 
-    void toDock(String ID) {
-
+    void toDock(String ID, SpaceShip s) {
+        System.out.println("itt CC");
+        iss.toDock(ID, s);
+        eventLog(s.ID + " dokkolt az ISS-re");
     }
 }
