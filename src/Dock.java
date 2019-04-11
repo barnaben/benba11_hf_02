@@ -1,9 +1,9 @@
 public class Dock {
-    boolean isFree = true;
+    boolean isFree;
     String ID;
 
     public Dock(String ID) {
-        this.isFree = isFree;
+        this.isFree = true;
         this.ID = ID;
     }
 

@@ -9,12 +9,12 @@ public class ISS {
     int guestLimit = 250;
     int currentGuests = 0;
     LinkedList<Passanger> waitRoom = new LinkedList<>();
-    Dock[] docks;
+    ArrayList<Dock> docks = new ArrayList<>();
 
     void ISS() {
         for (int i = 0; i < 5; i++) {
-            String str = "Dock" + (i + 1);
-            docks[i] = new Dock(str);
+            String str = ("Dock" + (i + 1));
+            docks.add(new Dock(str));
         }
     }
 
@@ -33,21 +33,23 @@ public class ISS {
 
     String requestDock(int weight, int pass) {
         String dock = checkDocks();
-        if ((weightLimit - currentWeight) >= weight && (guestLimit - currentGuests) >= pass && dock != null) {
+        if ((weightLimit - currentWeight) >= weight && (guestLimit - currentGuests) >= pass && !dock.equals("denied")) {
             return dock;
         }
-        return null;
+        return dock;
     }
 
     String checkDocks() {
-        for (int i = 0; i < 5; i++) {
-            if (docks[i].isFree == true) {
-                {
-                    return docks[i].ID;
-                }
+        synchronized (this) {
+            for (Dock d : docks) {
+                if (d.isFree == true) {
+                    {
+                        return d.ID;
+                    }
 
+                }
             }
+            return "denied";
         }
-        return null;
     }
 }

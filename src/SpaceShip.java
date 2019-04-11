@@ -23,7 +23,7 @@ public class SpaceShip extends Thread {
     public void run() {
         synchronized (this) {
             String dockID = CentralComp.getInstance().requestDock(this.ID, this.weight, this.capacity);
-            while (dockID == null) {
+            while (dockID.equals("denied")) {
                 try {
                     sleep(200);
                 } catch (InterruptedException e) {
