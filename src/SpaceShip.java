@@ -24,9 +24,7 @@ public class SpaceShip extends Thread {
         synchronized (this) {
             CentralComp.getInstance().requestDock(this);
             try {
-
                 wait();
-
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

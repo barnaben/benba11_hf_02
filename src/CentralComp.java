@@ -29,8 +29,10 @@ class CentralComp extends Thread {
     }
 
     void requestDock(SpaceShip s) {
-        System.out.println("itt");
-        s.notify();
+        synchronized (this) {
+            System.out.println("itt");
+            s.notify();
+        }
     }
 
     void toDock(SpaceShip s) {
