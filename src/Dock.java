@@ -1,9 +1,10 @@
 public class Dock {
     boolean isFree = true;
+    String ID;
 
-
-    public Dock() {
+    public Dock(String ID) {
         this.isFree = isFree;
+        this.ID = ID;
     }
 
     void PMA(Passanger p) {

@@ -22,14 +22,17 @@ public class SpaceShip extends Thread {
     @Override
     public void run() {
         synchronized (this) {
-            //  CentralComp.getInstance().requestDock(this);
-            try {
-                CentralComp.getInstance().requestDock(this);
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            String dockID = CentralComp.getInstance().requestDock(this.ID, this.weight, this.capacity);
+            while (dockID == null) {
+                try {
+                    sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                dockID = CentralComp.getInstance().requestDock(this.ID, this.weight, this.capacity);
             }
-            System.out.println("itt is");
+
+
             //CentralComp.getInstance().toDock(this);
         }
 

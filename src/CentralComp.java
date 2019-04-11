@@ -1,3 +1,5 @@
+import java.util.Random;
+
 class CentralComp extends Thread {
     ISS iss;
 
@@ -19,7 +21,22 @@ class CentralComp extends Thread {
 
     @Override
     public void run() {
-        super.run();
+        String name = "Ship";
+        int number = 0;
+        long timer = 0;
+
+        while (true) {
+            Random random = new Random();
+            long time = System.currentTimeMillis();
+            if ((time - timer) > (random.nextInt(5000) + 5000)) {
+                SpaceShip s = new SpaceShip(name + number, random.nextInt(900) + 100, random.nextInt(90) + 10);
+                s.run();
+                String str = "A " + s.ID + " hajó elindult " + s.weight + " sullyal es " + s.capacity + " emberrel";
+                CentralComp.getInstance().eventLog(str);
+                timer = time;
+                number++;
+            }
+        }
     }
 
     void eventLog(String s) {
@@ -28,15 +45,13 @@ class CentralComp extends Thread {
         }
     }
 
-    void requestDock(SpaceShip s) {
-
-            System.out.println("itt");
-
-        s.notify();
-
+    String requestDock(String ID, int weight, int cap) {
+        eventLog(ID + " várakozik dokkoláshoz");
+        String str = iss.requestDock(weight, cap);
+        return str;
     }
 
-    void toDock(SpaceShip s) {
+    void toDock(String ID) {
 
     }
 }
