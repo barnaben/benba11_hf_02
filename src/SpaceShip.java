@@ -22,8 +22,9 @@ public class SpaceShip extends Thread {
     @Override
     public void run() {
         synchronized (this) {
-            CentralComp.getInstance().requestDock(this);
+            //  CentralComp.getInstance().requestDock(this);
             try {
+                CentralComp.getInstance().requestDock(this);
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -33,4 +34,6 @@ public class SpaceShip extends Thread {
         }
 
     }
+
+
 }
