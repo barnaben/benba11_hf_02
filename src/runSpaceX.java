@@ -16,7 +16,8 @@ public class runSpaceX {
             if ((time - timer) > (random.nextInt(5000) + 5000)) {
                 SpaceShip s = new SpaceShip(name + number, random.nextInt(900) + 100, random.nextInt(90) + 10);
                 s.run();
-                System.out.println("A " + s.ID + " hajó elindult " + s.weight + " sullyal es " + s.capacity + " emberrel");
+                String str = "A " + s.ID + " hajó elindult " + s.weight + " sullyal es " + s.capacity + " emberrel";
+                CentralComp.getInstance().eventLog(str);
                 timer = time;
                 number++;
             }

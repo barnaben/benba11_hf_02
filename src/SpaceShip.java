@@ -21,18 +21,18 @@ public class SpaceShip extends Thread {
 
     @Override
     public void run() {
+        synchronized (this) {
+            CentralComp.getInstance().requestDock(this);
+            try {
 
-        CentralComp.getInstance().requestDock(this);
-        try {
-            synchronized (this) {
                 wait();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("itt is");
-        //CentralComp.getInstance().toDock(this);
 
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("itt is");
+            //CentralComp.getInstance().toDock(this);
+        }
 
     }
 }

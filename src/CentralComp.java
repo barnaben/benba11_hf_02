@@ -23,7 +23,9 @@ class CentralComp extends Thread {
     }
 
     void eventLog(String s) {
-
+        synchronized (this) {
+            System.out.println(s);
+        }
     }
 
     void requestDock(SpaceShip s) {
